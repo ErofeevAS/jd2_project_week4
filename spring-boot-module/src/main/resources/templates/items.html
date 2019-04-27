@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Items</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th> #</th>
+        <th> name</th>
+        <th> Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="item,number : ${items}">
+        <tr>
+            <td th:text="${number.count+paginator.size*((paginator.page)-1)}"></td>
+            <td th:text="${item.name}">...</td>
+            <td th:text="${item.status}">...</td>
+        </tr>
+    </th:block>
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+</table>
+
+<a th:href="@{/logout}" th:text="logout"></a>
+
+<div class="pagination">
+    <a th:href="@{/items(page='1',size='2')}" th:text="first"></a>
+    <a th:href="@{/items(page=${paginator.page}-1,size=${paginator.size})}" th:text="prev"></a>
+    <span th:each="pageNumber:${#numbers.sequence(1,paginator.maxPage)}">
+        <a th:href="@{/items(page=${pageNumber},size=${paginator.size})}" th:text="${pageNumber}"></a>
+    </span>
+    <a th:href="@{/items(page=${paginator.page}+1,size=${paginator.size})}" th:text="next"></a>
+    <a th:href="@{/items(page=${paginator.maxPage},size=${paginator.size})}" th:text="last"></a>
+    <select th:field="${paginator.size}" th:id="sizeSelector" th:name="sizeSelector"
+            onchange="selectField('sizeSelector')">
+        <option th:each="state : ${paginator.droppedListValues}"
+                th:selected="${state==paginator.size}" th:value="${state}" th:text="${state}">
+        </option>
+    </select>
+</div>
+
+<script th:inline="javascript">
+    function selectField(size) {
+        var size = document.getElementById(size);
+        var url = new URL('http://localhost:8080/items');
+        var queryString = url.search;
+        var searchParams = new URLSearchParams(queryString);
+        searchParams.append('page', '1');
+        searchParams.append('size', size.value);
+        url.search = searchParams.toString();
+        var new_url = url.toString();
+        window.location.replace(url);
+    }
+</script>
+</body>
+</html>
