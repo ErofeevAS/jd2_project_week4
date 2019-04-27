@@ -40,14 +40,13 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> findAll(Connection connection, int offset, int amount) {
-//        String sql = "SELECT * FROM users LIMIT ?,?";
         String sql =
                 "SELECT users.id as user_id, username,password,deleted, roles.id as role_id,roles.name as role_name " +
                         "FROM users " +
-                        "JOIN roles ON users.role_id = roles.id";
+                        "JOIN roles ON users.role_id = roles.id LIMIT ?,?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-//            preparedStatement.setInt(1, offset);
-//            preparedStatement.setInt(2, amount);
+            preparedStatement.setInt(1, offset);
+            preparedStatement.setInt(2, amount);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 List<User> users = new ArrayList<>();
                 while (resultSet.next()) {
