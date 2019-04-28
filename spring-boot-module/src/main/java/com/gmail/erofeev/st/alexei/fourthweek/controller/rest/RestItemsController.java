@@ -18,11 +18,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/items")
 @Validated
-public class RestApiItemsController {
+public class RestItemsController {
     private final ItemService itemService;
 
     @Autowired
-    public RestApiItemsController(ItemService itemService) {
+    public RestItemsController(ItemService itemService) {
         this.itemService = itemService;
     }
 
@@ -34,5 +34,4 @@ public class RestApiItemsController {
         List<ItemDTO> items = itemService.getItems(offset, amount);
         return new ResponseEntity(items, HttpStatus.OK);
     }
-
 }

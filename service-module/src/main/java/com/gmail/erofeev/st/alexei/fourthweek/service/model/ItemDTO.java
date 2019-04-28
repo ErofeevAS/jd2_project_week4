@@ -7,6 +7,9 @@ public class ItemDTO {
     private String name;
     private ItemDTOStatusEnum status;
 
+    public ItemDTO() {
+    }
+
     public ItemDTO(Long id, String name, ItemDTOStatusEnum status) {
         this.id = id;
         this.name = name;

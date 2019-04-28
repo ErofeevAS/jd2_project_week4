@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -17,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UserControllerTest {
+public class RedirectControllerTest {
     @Autowired
     private WebApplicationContext context;
 
@@ -41,26 +40,5 @@ public class UserControllerTest {
     public void shouldSucceedWith200ForAboutPage() throws Exception {
         mvc.perform(get("/about"))
                 .andExpect(status().isOk());
-    }
-
-    @WithMockUser(roles = "Customer")
-    @Test
-    public void shouldSucceedWith200ForItemsPage() throws Exception {
-        mvc.perform(get("/items"))
-                .andExpect(status().isOk());
-    }
-
-    @WithMockUser(roles = "Administrator")
-    @Test
-    public void shouldSucceedWith200ForUsersPage() throws Exception {
-        mvc.perform(get("/users"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    @WithMockUser(roles = "Administrator")
-    public void shouldForbidAccess() throws Exception {
-        mvc.perform(get("/items"))
-                .andExpect(status().isFound());
     }
 }

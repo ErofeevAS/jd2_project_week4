@@ -7,10 +7,7 @@ import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServic
 @SpringBootApplication(
         exclude = UserDetailsServiceAutoConfiguration.class,
         scanBasePackages = {
-                "com.gmail.erofeev.st.alexei.fourthweek.service",
-                "com.gmail.erofeev.st.alexei.fourthweek.repository",
                 "com.gmail.erofeev.st.alexei.fourthweek"
-
         })
 public class SpringBootModuleApplication {
 

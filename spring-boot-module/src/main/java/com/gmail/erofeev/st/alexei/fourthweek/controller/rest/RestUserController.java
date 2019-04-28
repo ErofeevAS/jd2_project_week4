@@ -3,6 +3,8 @@ package com.gmail.erofeev.st.alexei.fourthweek.controller.rest;
 import com.gmail.erofeev.st.alexei.fourthweek.service.UserService;
 import com.gmail.erofeev.st.alexei.fourthweek.service.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,11 +19,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 @Validated
-public class RestApiUserController {
+public class RestUserController {
     private final UserService userService;
 
     @Autowired
-    public RestApiUserController(UserService userService) {
+    public RestUserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -34,9 +36,8 @@ public class RestApiUserController {
     }
 
     @PostMapping
-    public void addUser(
-            @RequestBody UserDTO userDTO
-    ) {
+    public ResponseEntity addUser(@RequestBody UserDTO userDTO) {
         userService.add(userDTO);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 }

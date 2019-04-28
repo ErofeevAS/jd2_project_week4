@@ -1,5 +1,3 @@
-use week4;
-
 DROP TABLE users;
 DROP TABLE items;
 DROP TABLE roles;
@@ -44,10 +42,5 @@ INSERT INTO items (name,status) VALUES('item_5','READY');
 INSERT INTO items (name,status) VALUES('item_6','READY');
 INSERT INTO items (name,status) VALUES('item_7','READY');
 INSERT INTO items (name,status) VALUES('item_8','READY');
-INSERT INTO items (name,status) VALUES('item_9','READY');
-INSERT INTO items (name,status) VALUES('item_10','READY');
-INSERT INTO items (name,status) VALUES('item_11','READY');
-INSERT INTO items (name,status) VALUES('item_12','READY');
-
 
 

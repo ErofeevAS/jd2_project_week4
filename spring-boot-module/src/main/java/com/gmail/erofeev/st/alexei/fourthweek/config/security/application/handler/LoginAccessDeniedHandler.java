@@ -1,7 +1,9 @@
 package com.gmail.erofeev.st.alexei.fourthweek.config.security.application.handler;
 
+import com.gmail.erofeev.st.alexei.fourthweek.config.properties.SecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +17,12 @@ import java.io.IOException;
 @Component
 public class LoginAccessDeniedHandler implements AccessDeniedHandler {
     private static final Logger logger = LoggerFactory.getLogger(LoginAccessDeniedHandler.class);
+    private final SecurityProperties securityProperties;
+
+    @Autowired
+    public LoginAccessDeniedHandler(SecurityProperties securityProperties) {
+        this.securityProperties = securityProperties;
+    }
 
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException {
@@ -22,6 +30,6 @@ public class LoginAccessDeniedHandler implements AccessDeniedHandler {
         if (authentication != null) {
             logger.info("{} was trying to access protected resources: {}", authentication.getName(), httpServletRequest.getRequestURI());
         }
-        httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/403");
+        httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + securityProperties.getForbidRedirectPage());
     }
 }

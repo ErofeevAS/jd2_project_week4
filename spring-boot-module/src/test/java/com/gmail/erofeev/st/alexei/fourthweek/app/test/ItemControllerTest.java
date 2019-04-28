@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UserControllerTest {
+public class ItemControllerTest {
     @Autowired
     private WebApplicationContext context;
 
@@ -31,29 +31,10 @@ public class UserControllerTest {
                 .build();
     }
 
-    @Test
-    public void shouldSucceedWith200ForLoginPage() throws Exception {
-        mvc.perform(get("/login"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void shouldSucceedWith200ForAboutPage() throws Exception {
-        mvc.perform(get("/about"))
-                .andExpect(status().isOk());
-    }
-
-    @WithMockUser(roles = "Customer")
+    @WithMockUser(roles ="Customer")
     @Test
     public void shouldSucceedWith200ForItemsPage() throws Exception {
         mvc.perform(get("/items"))
-                .andExpect(status().isOk());
-    }
-
-    @WithMockUser(roles = "Administrator")
-    @Test
-    public void shouldSucceedWith200ForUsersPage() throws Exception {
-        mvc.perform(get("/users"))
                 .andExpect(status().isOk());
     }
 

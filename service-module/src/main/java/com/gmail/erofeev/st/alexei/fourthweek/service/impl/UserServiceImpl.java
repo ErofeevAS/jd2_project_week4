@@ -108,9 +108,9 @@ public class UserServiceImpl implements UserService {
             try {
                 connection.setAutoCommit(false);
                 userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-                String roleName = userDTO.getRole().getName();
-                Role role = roleRepository.findByName(connection, roleName);
                 User user = userConverter.fromDTO(userDTO);
+                String roleName = user.getRole().getName();
+                Role role = roleRepository.findByName(connection, roleName);
                 user.setRole(role);
                 userRepository.add(connection, user);
                 connection.commit();

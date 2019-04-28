@@ -7,12 +7,21 @@ public class UserDTO {
     private RoleDTO role;
     private Boolean isDeleted;
 
+    public UserDTO() {
+    }
+
     public UserDTO(Long id, String username, String password, RoleDTO role, Boolean isDeleted) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
         this.isDeleted = isDeleted;
+    }
+
+    public UserDTO(String username, String password, RoleDTO role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
     }
 
     public Long getId() {

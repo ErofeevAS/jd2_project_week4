@@ -38,9 +38,9 @@ public class RestApiSecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.antMatcher("/api/v1/**")
                 .authorizeRequests()
                 .antMatchers("/api/v1/items")
-                .access("hasRole('Customer')")
+                .hasRole("Customer")
                 .antMatchers("/api/v1/users")
-                .access("hasRole('Administrator')")
+                .hasRole("Administrator")
                 .and()
                 .httpBasic()
                 .and()
@@ -49,5 +49,4 @@ public class RestApiSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable();
     }
-
 }
