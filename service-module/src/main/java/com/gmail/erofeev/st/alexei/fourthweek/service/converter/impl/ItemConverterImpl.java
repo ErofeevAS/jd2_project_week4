@@ -4,6 +4,7 @@ import com.gmail.erofeev.st.alexei.fourthweek.repository.model.Item;
 import com.gmail.erofeev.st.alexei.fourthweek.repository.model.emuns.ItemStatusEnum;
 import com.gmail.erofeev.st.alexei.fourthweek.service.converter.ItemConverter;
 import com.gmail.erofeev.st.alexei.fourthweek.service.model.ItemDTO;
+import com.gmail.erofeev.st.alexei.fourthweek.service.model.enums.ItemDTOStatusEnum;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class ItemConverterImpl implements ItemConverter {
     public ItemDTO toDTO(Item item) {
         Long id = item.getId();
         String name = item.getName();
-        ItemStatusEnum status = item.getStatus();
+        ItemDTOStatusEnum status = toItemDTOStatus(item.getStatus());
         return new ItemDTO(id, name, status);
     }
 
@@ -24,7 +25,7 @@ public class ItemConverterImpl implements ItemConverter {
     public Item fromDTO(ItemDTO item) {
         Long id = item.getId();
         String name = item.getName();
-        ItemStatusEnum status = item.getStatus();
+        ItemStatusEnum status = toItemStatus(item.getStatus());
         return new Item(id, name, status);
     }
 
@@ -35,5 +36,13 @@ public class ItemConverterImpl implements ItemConverter {
             itemsDTO.add(toDTO(item));
         }
         return itemsDTO;
+    }
+
+    private ItemDTOStatusEnum toItemDTOStatus(ItemStatusEnum status) {
+        return ItemDTOStatusEnum.valueOf(status.name());
+    }
+
+    private ItemStatusEnum toItemStatus(ItemDTOStatusEnum statusDTO) {
+        return ItemStatusEnum.valueOf(statusDTO.name());
     }
 }

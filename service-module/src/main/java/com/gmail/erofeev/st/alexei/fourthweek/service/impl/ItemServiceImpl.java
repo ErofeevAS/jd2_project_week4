@@ -59,6 +59,7 @@ public class ItemServiceImpl implements ItemService {
             connection.setAutoCommit(false);
             try {
                 Integer amount = itemRepository.getAmount(connection);
+                amountOfDisplayedItems = Math.abs(amountOfDisplayedItems);
                 amount = (Math.round(amount / amountOfDisplayedItems) + 1);
                 connection.commit();
                 return amount;

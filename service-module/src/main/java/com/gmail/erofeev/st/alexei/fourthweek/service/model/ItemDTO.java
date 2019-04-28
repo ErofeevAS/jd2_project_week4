@@ -1,13 +1,13 @@
 package com.gmail.erofeev.st.alexei.fourthweek.service.model;
 
-import com.gmail.erofeev.st.alexei.fourthweek.repository.model.emuns.ItemStatusEnum;
+import com.gmail.erofeev.st.alexei.fourthweek.service.model.enums.ItemDTOStatusEnum;
 
 public class ItemDTO {
     private Long id;
     private String name;
-    private ItemStatusEnum status;
+    private ItemDTOStatusEnum status;
 
-    public ItemDTO(Long id, String name, ItemStatusEnum status) {
+    public ItemDTO(Long id, String name, ItemDTOStatusEnum status) {
         this.id = id;
         this.name = name;
         this.status = status;
@@ -29,11 +29,11 @@ public class ItemDTO {
         this.name = name;
     }
 
-    public ItemStatusEnum getStatus() {
+    public ItemDTOStatusEnum getStatus() {
         return status;
     }
 
-    public void setStatus(ItemStatusEnum status) {
+    public void setStatus(ItemDTOStatusEnum status) {
         this.status = status;
     }
 }

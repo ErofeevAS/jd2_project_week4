@@ -1,8 +1,8 @@
 package com.gmail.erofeev.st.alexei.fourthweek.controller;
 
+import com.gmail.erofeev.st.alexei.fourthweek.controller.util.Paginator;
 import com.gmail.erofeev.st.alexei.fourthweek.service.ItemService;
 import com.gmail.erofeev.st.alexei.fourthweek.service.model.ItemDTO;
-import com.gmail.erofeev.st.alexei.fourthweek.controller.util.Paginator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
