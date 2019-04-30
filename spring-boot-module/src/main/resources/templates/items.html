@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>Items</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div th:insert="~{fragments/my_header :: myHeader}"></div>
+<table>
+    <thead>
+    <tr>
+        <th> #</th>
+        <th> name</th>
+        <th> Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="item,number : ${items}">
+        <tr>
+            <td th:text="${number.count+paginator.size*((paginator.page)-1)}"></td>
+            <td th:text="${item.name}">...</td>
+            <td th:text="${item.status}">...</td>
+        </tr>
+    </th:block>
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+</table>
+
+<div th:insert="~{fragments/paginator :: paginator(content='/items')}"></div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Users</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div th:insert="~{fragments/my_header :: myHeader}"></div>
+<table>
+    <thead>
+    <tr>
+        <th> #</th>
+        <th> name</th>
+        <th> Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="user,number : ${users}">
+        <tr>
+            <td th:text="${number.count+paginator.size*((paginator.page)-1)}"></td>
+            <td th:text="${user.username}">...</td>
+            <td th:text="${user.role.name}">...</td>
+        </tr>
+    </th:block>
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>
+<div th:insert="~{fragments/paginator :: paginator(content='/users')}"></div>
+
+</body>
+</html>
