@@ -23,6 +23,7 @@ public class RoleRepositoryImpl implements RoleRepository {
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, name);
             try (ResultSet rs = ps.executeQuery()) {
+                rs.next();
                 return getRole(rs);
             }
         } catch (SQLException e) {
@@ -33,7 +34,6 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     private Role getRole(ResultSet resultSet) throws SQLException {
-        resultSet.next();
         Long id = resultSet.getLong(1);
         String name = resultSet.getString(2);
         return new Role(id, name);

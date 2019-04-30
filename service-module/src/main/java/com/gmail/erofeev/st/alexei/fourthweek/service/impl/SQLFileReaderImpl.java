@@ -1,6 +1,7 @@
 package com.gmail.erofeev.st.alexei.fourthweek.service.impl;
 
 import com.gmail.erofeev.st.alexei.fourthweek.service.SQLFileReaderService;
+import com.gmail.erofeev.st.alexei.fourthweek.service.exception.SQLFileReaderException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -30,11 +31,11 @@ public class SQLFileReaderImpl implements SQLFileReaderService {
             } catch (FileNotFoundException e) {
                 String message = "File not exist: " + file + " : " + e.getMessage();
                 logger.error(message);
-                throw new RuntimeException(e);
+                throw new SQLFileReaderException(message, e);
             } catch (IOException e) {
                 String message = "Can't read file: " + file + " : " + e.getMessage();
-                logger.error(message);
-                throw new RuntimeException(e);
+                logger.error(message, e);
+                throw new SQLFileReaderException(message, e);
             }
         }
         return stringBuilder.toString().split(";");
